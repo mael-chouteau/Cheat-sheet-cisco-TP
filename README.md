@@ -1,4 +1,4 @@
-# Procédure de Sauvegarde et Restauration d'IOS Cisco (Switch 2960 & Routeur 2811)
+# Procédure de Sauvegarde et Restauration d'IOS Cisco (Switch 2960 & Routeur 2811/2901)
 
 Ce document détaille la procédure pour extraire une image IOS d'un équipement fonctionnel et la restaurer sur un équipement vierge ou bloqué en mode ROMMON via TFTP.
 
@@ -68,15 +68,22 @@ copy flash:c2960-lanbasek9-MZ.150-2.SE4.bin tftp:
 
 
 
-### B. Sur un Routeur Cisco 2811
+### B. Sur un Routeur Cisco (2811 ou 2901)
 
-Connecter le câble Ethernet impérativement sur **FastEthernet0/0** (nécessaire pour la procédure ROMMON ultérieure).
+**Important :** Connecter le câble Ethernet sur l'interface de management principale. C'est impératif pour la procédure ROMMON.
+
+* **Routeur 2811 :** Utiliser le port **FastEthernet0/0 (Fa0/0)**.
+* **Routeur 2901 :** Utiliser le port **GigabitEthernet0/0 (G0/0)**.
 
 1. **Configuration de l'interface :**
 ```cisco
 enable
 conf t
+! Choisir l'interface selon le modèle :
+! Pour 2811 :
 interface FastEthernet0/0
+! Pour 2901 :
+interface GigabitEthernet0/0
 ip address 10.30.1.2 255.255.255.0
 no shutdown
 exit
@@ -96,8 +103,9 @@ Cette procédure s'applique aux équipements sans IOS valide ou bloqués en `rom
 
 **Branchement Physique :**
 
-* **Switch :** Connecter le port Ethernet au port **Fa0/1**.
-* **Routeur :** Connecter le port Ethernet au port **FastEthernet0/0** (Le ROMMON utilise cette interface par défaut).
+* **Switch 2960 :** Port **Fa0/1**. (Le mode ROMMON utilise par défaut la première interface disponible. Si vous utilisez un autre port (ex: Fa0/2 ou G0/1), le tftp ne fonctionnera pas.)
+* **Routeur 2811 :** Port **FastEthernet0/0**.
+* **Routeur 2901 :** Port **GigabitEthernet0/0**.(Le ROMMON utilise cette interface par défaut).
 * *Note Routeur :* Si vous utilisez une carte Compact Flash (CF) externe, l'échange peut se faire routeur éteint.
 
 ### Configuration des variables d'environnement
