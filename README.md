@@ -1,4 +1,4 @@
-# Procédure de Sauvegarde et Restauration d'IOS Cisco (Switch 2960 & Routeur 2800)
+# Procédure de Sauvegarde et Restauration d'IOS Cisco (Switch 2960 & Routeur 2811)
 
 Ce document détaille la procédure pour extraire une image IOS d'un équipement fonctionnel et la restaurer sur un équipement vierge ou bloqué en mode ROMMON via TFTP.
 
@@ -68,7 +68,7 @@ copy flash:c2960-lanbasek9-MZ.150-2.SE4.bin tftp:
 
 
 
-### B. Sur un Routeur Cisco 2800
+### B. Sur un Routeur Cisco 2811
 
 Connecter le câble Ethernet impérativement sur **FastEthernet0/0** (nécessaire pour la procédure ROMMON ultérieure).
 
@@ -148,7 +148,7 @@ Si le texte est illisible au démarrage, testez les vitesses de connexion (Baud 
 
 ### Procédure de Reset Mot de Passe
 
-#### Pour Routeur (ex: 2800)
+#### Pour Routeur (ex: 2811)
 
 1. **Entrer en ROMMON :** Redémarrer le routeur et faire `CTRL+Break` (Putty) ou `ALT+B` (TeraTerm) dans les 5 premières secondes.
 2. **Contourner la conf :**
